@@ -2,19 +2,24 @@
 	"name": "@mudas/util-store",
 	"version": "0.0.3",
 	"description": "A library project using commonjs type",
-	"author": "张雄军 <zxj@blibao.cn>",
+	"author": "mudas(aosnow@yeah.net)",
 	"license": "MIT",
 	"main": "dist/util-store.common.js",
-	"module": "",
-	"homepage": "",
+	"module": "dist/util-store.esm.js",
+  "sideEffects": false,
+	"homepage": "https://github.com/aosnow/util-store",
+	"bugs": {
+		"url": "https://github.com/aosnow/util-store/issues"
+	},
 	"repository": {
 		"type": "git",
-		"url": ""
+		"url": "https://github.com/aosnow/util-store"
 	},
 	"keywords": [],
 	"scripts": {
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build --target lib --name util-store packages/index.js",
+		"rollup": "rollup -c",
 		"report": "vue-cli-service build --target lib --name util-store packages/index.js --report",
 		"lint": "vue-cli-service lint",
 		"test:unit": "vue-cli-service test:unit",
@@ -32,8 +37,7 @@
 		"fsevents": "*"
 	},
 	"dependencies": {
-		"core-js": "^3.6.4",
-		"vuex": "^3.1.2"
+		"core-js": "^3.6.5"
 	},
 	"devDependencies": {
 		"@vue/cli-plugin-babel": "~4.2.0",
@@ -44,11 +48,14 @@
 		"@vue/eslint-config-airbnb": "^5.0.2",
 		"@vue/test-utils": "1.0.0-beta.31",
 		"babel-eslint": "^10.0.3",
-		"element-ui": "^2.13.0",
+		"element-ui": "^2.13.1",
 		"eslint": "^6.7.2",
 		"eslint-plugin-import": "^2.20.1",
 		"eslint-plugin-vue": "^6.1.2",
+		"rollup": "^2.6.1",
+		"rollup-plugin-delete": "^1.2.0",
 		"vue": "^2.6.11",
-		"vue-template-compiler": "^2.6.11"
+		"vue-template-compiler": "^2.6.11",
+		"vuex": "^3.1.2"
 	}
 }

@@ -8,7 +8,7 @@
     <div>es6.then.catch.finally: {{promise().then(()=>{}).catch(reason=>{}).finally}}</div>
 
     <div class="app__control">
-      <el-button @click="emitEvent">随机增量属性</el-button>
+      <el-button>随机增量属性</el-button>
       <el-button>增量数组</el-button>
       <el-button>增量null</el-button>
       <el-button>增量不存在属性</el-button>
@@ -23,19 +23,9 @@
 import Vue from 'vue';
 import { mapGetters } from 'vuex';
 import * as Types from '@/store/types';
-import * as utils from '@mudas/util-store';
-
-import Child from './Child';
 
 export default {
   name: 'app',
-  components: { Child },
-  handler: {
-    ['test-event'](option) {
-      // this.methodTest(option);
-      console.warn('test-event.app:', this, option);
-    }
-  },
 
   computed: {
     ...mapGetters({
@@ -44,18 +34,10 @@ export default {
   },
 
   methods: {
-    emitEvent() {
-      Vue.emit('test-event', { arguments: 123 });
-    },
-
     promise() {
       return new Promise(resolve => {
         resolve(true);
       });
-    },
-
-    methodTest(option) {
-      console.warn('test-event.app:', this, option);
     }
   }
 };
