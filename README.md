@@ -5,7 +5,7 @@
 ## Setup
 install：
 ```npm
-npm i @mudas/plugin-vue-handler -S
+npm i @mudas/util-store -S
 ```
 
 You need to add configuration for vue-cli to correctly translate the es module in node_modules:
