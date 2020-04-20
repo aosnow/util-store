@@ -16,7 +16,7 @@ export default [
   // `file` and `format` for each target)
   {
     input: 'packages/index.js',
-    external: ['vue'],
+    external: ['vue', 'lodash-es'],
     plugins: [
       delPlug({ targets: 'dist/*' })
     ],

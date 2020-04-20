@@ -5,6 +5,7 @@
 // ------------------------------------------------------------------------------
 
 import Vue from 'vue';
+import { isString, isNumber, isBoolean, isNull, isArray, isPlainObject } from 'lodash-es';
 
 /**
  * 合并多个子级 store 模块后输出合并模块
@@ -49,25 +50,38 @@ export function increment(state, data) {
  * @private
  */
 function _merge(holder, source) {
-  if (typeof source === 'object' && source !== null) {
+  if (isPlainObject(source)) {
     Object.keys(source)
           .forEach(key => {
-            if (holder[key]) {
-              if (typeof source[key] === 'object' && source !== null) {
-                _merge(holder[key], source[key]);
+
+            if (isPlainObject(source[key])) {
+              // holder 不存在对应属性或者为值类型、数组、null 将创建新的 key
+              if (!(key in holder)
+                  || isString(holder[key])
+                  || isNumber(holder[key])
+                  || isBoolean(holder[key])
+                  || isNull(holder[key])
+                  || isArray(holder[key])) {
+                Vue.set(holder, key, Object.create(null));
+              }
+
+              _merge(holder[key], source[key]);
+            }
+            else {
+              if (!holder[key]) {
+                Vue.set(holder, key, source[key]);
               }
               else {
                 holder[key] = source[key];
               }
             }
-            else {
-              // 不存在的属性，直接赋值
-              Vue.set(holder, key, source[key]);
-            }
+
           });
   }
   else {
-    // 数组、值类型直接赋值
-    holder = source;
+    // 非 PlainObject 类型直接赋值
+    // 由于函数内传入的是引用，无法直接达到覆盖根级的目的
+    // 需要退回到 mutation 中直接使用 = 等号赋值
+    holder = source; // 此处无效，只是覆盖了参数值，state 值不变
   }
 }
