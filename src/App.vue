@@ -7,6 +7,9 @@
       <el-button @click="addArray">增量数组</el-button>
       <el-button @click="addNull">增量null</el-button>
       <el-button @click="addMutiLevelAttr">增量多层级属性</el-button>
+
+      <el-button @click="addArrayPreObject">增量数组-预置 Object</el-button>
+      <el-button @click="addArrayFillArray">增量数组-填充 Array</el-button>
     </div>
 
   </div>
@@ -27,6 +30,10 @@ export default {
   },
 
   methods: {
+    getRnd(n, min = 0) {
+      return (Math.random() * n >> 0) + min;
+    },
+
     addRndAttr() {
       const ns = {};
       this.setAttr(ns);
@@ -34,9 +41,17 @@ export default {
     },
     addArray() {
       const a = [];
-      for (let i = 0; i < 5; i++) a.push(Math.random() * 10 >> 0);
-      this.$store.commit(Types.ENV_INFO, { arr: a });
+      for (let i = 0; i < this.getRnd(5, 1); i++) a.push({ [this.getRnd(10)]: this.getRnd(10) });
+      this.$store.commit(Types.ENV_INFO, { size_list: a });
     },
+
+    addArrayPreObject() {
+      this.$store.commit(Types.ENV_INFO, { size_list: Object.create(null) });
+    },
+    addArrayFillArray() {
+      this.addArray();
+    },
+
     addNull() {
       this.$store.commit(Types.ENV_INFO, { null: null });
     },

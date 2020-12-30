@@ -1,7 +1,7 @@
 {
 	"name": "@mudas/util-store",
-	"version": "0.0.5",
-	"description": "A library project using commonjs type",
+	"version": "0.0.6",
+	"description": "toolkit for store",
 	"author": "mudas(aosnow@yeah.net)",
 	"license": "MIT",
 	"main": "dist/util-store.common.js",

@@ -5,7 +5,7 @@
 // ------------------------------------------------------------------------------
 
 import Vue from 'vue';
-import { isString, isNumber, isBoolean, isNull, isArray, isPlainObject } from 'lodash-es';
+import { isString, isNumber, isBoolean, isNull, isArray, isPlainObject } from './utils';
 
 /**
  * 合并多个子级 store 模块后输出合并模块
@@ -68,7 +68,7 @@ function _merge(holder, source) {
               _merge(holder[key], source[key]);
             }
             else {
-              if (!holder[key]) {
+              if (!(key in holder)) {
                 Vue.set(holder, key, source[key]);
               }
               else {
